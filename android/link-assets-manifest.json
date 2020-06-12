@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/BPscript.otf",
+      "sha1": "08fad4bee7d4b1f8a44aa813be572e8c0f337668"
+    },
+    {
+      "path": "assets/fonts/DeliusSwashCaps-Regular.ttf",
+      "sha1": "a157b8fbbabfd021841c851ac1d034ebcf708076"
+    }
+  ]
+}
