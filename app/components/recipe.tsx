@@ -3,13 +3,13 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {NavigationParams} from 'react-navigation';
 
 // import Fonts from '../utils/fonts';
-import {Category} from '../utils/constants';
+import {RecipeProps} from '../types';
 
 interface Props {
-  item: Category;
+  item: RecipeProps;
 }
 
-const CategoryItem = (
+const Recipe = (
   navigation: NavigationParams,
 ): React.FunctionComponent<Props> => ({item}) => {
   return (
@@ -17,10 +17,10 @@ const CategoryItem = (
       style={styles.item}
       activeOpacity={0.8}
       onPress={() => {
-        navigation.navigate({routeName: 'meals'});
+        navigation.navigate({routeName: 'details', params: {recipe: item}});
       }}>
       <View>
-        <Text>{item.name}</Text>
+        <Text>{item.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CategoryItem;
+export default Recipe;

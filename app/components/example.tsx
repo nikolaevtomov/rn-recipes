@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import Fonts from '../utils/fonts';
 import Styles from '../utils/styles';
 
@@ -13,8 +13,8 @@ const Example: React.FunctionComponent<Props> = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {},
-});
+// const styles = StyleSheet.create({
+//   screen: {},
+// });
 
 export default Example;

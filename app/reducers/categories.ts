@@ -1,10 +1,6 @@
-export interface Category {
-  id: string;
-  name: string;
-  color: string;
-}
+import {CategoryProp} from '../types';
 
-export const CATEGORIES: Array<Category> = [
+export const CATEGORIES: Array<CategoryProp> = [
   {id: 'c1', name: 'Italian', color: '#f5428d'},
   {id: 'c2', name: 'Quick & Easy', color: '#f54242'},
   {id: 'c3', name: 'Hamburgers', color: '#f5a442'},
@@ -16,3 +12,17 @@ export const CATEGORIES: Array<Category> = [
   {id: 'c9', name: 'French', color: '#ffc7ff'},
   {id: 'c10', name: 'Summer', color: '#47fced'},
 ];
+
+const initialState: Array<CategoryProp> = CATEGORIES;
+
+const categoriesReducer = (state = initialState, action: any) => {
+  switch (action.type) {
+    case 'ANY':
+      return state;
+
+    default:
+      return initialState;
+  }
+};
+
+export default categoriesReducer;
