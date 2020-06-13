@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, ImageBackground, StyleSheet} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 
-// import {RECIPES} from '../utils/constants';
 import Fonts from '../utils/fonts';
 import Styles from '../utils/styles';
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {NavigationParams} from 'react-navigation';
 
-// import Fonts from '../utils/fonts';
 import {RecipeProps} from '../types';
 
 interface Props {

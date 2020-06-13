@@ -3,8 +3,6 @@ import {FlatList} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
 
-// import Fonts from '../utils/fonts';
-// import Styles from '../utils/styles';
 import {RecipeProps, StoreState} from '../types';
 import Recipe from './recipe';
 
