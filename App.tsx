@@ -4,6 +4,7 @@ import {StatusBar, Platform} from 'react-native';
 import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import {enableScreens} from 'react-native-screens';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 import Navigation from './app/components/navigation';
 import categoriesReducer from './app/reducers/categories';
@@ -19,7 +20,9 @@ const rootReducer = combineReducers<StoreState>({
   recipes: recipesReducer,
 });
 
-const store = createStore(rootReducer);
+const composeEnhancers = composeWithDevTools({});
+
+const store = createStore(rootReducer, composeEnhancers());
 
 const App: React.FunctionComponent = () => {
   return (
