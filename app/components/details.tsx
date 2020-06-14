@@ -7,11 +7,15 @@ import {
   HeaderButtons,
   Item,
 } from 'react-navigation-header-buttons';
-import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+// import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+
+import Fonts from '../utils/fonts';
+import {toggleFavorite} from '../actions';
+import {StoreState} from '../types';
 
 const MaterialHeaderButton = (props: any) => (
   <HeaderButton
-    IconComponent={MaterialIcons}
+    // IconComponent={MaterialIcons}
     iconSize={23}
     color="yellow"
     {...props}
@@ -23,10 +27,6 @@ export const MaterialHeaderButtons = (props: any) => {
     <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />
   );
 };
-
-import Fonts from '../utils/fonts';
-import {toggleFavorite} from '../actions';
-import {StoreState} from '../types';
 
 interface OwnProps {
   navigation: NavigationParams;
@@ -98,14 +98,13 @@ const MealDetails: React.FunctionComponent<Props> &
 };
 
 MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
-  // console.log(navigation);
   return {
     headerTitle: navigation.state.params.recipe.title,
     headerRight: () => (
       <MaterialHeaderButtons>
         <Item
-          title="favorite"
-          iconName={navigation.state.params.favorite ? 'star' : 'star-o'}
+          title={navigation.getParam('favorite') ? 'O' : 'X'}
+          // iconName={navigation.getParam('favorite') ? 'star' : 'star'}
           onPress={() =>
             navigation.state.params.toggleee(navigation.state.params.recipe.id)
           }
@@ -114,6 +113,14 @@ MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
     ),
   };
 };
+
+const mapStateToProps = (state: StoreState, props: Props): StateProps => ({
+  isFavorite: state.ui.includes(props.navigation.state.params.recipe.id),
+});
+
+export default connect(mapStateToProps, {
+  toggleFavs: toggleFavorite,
+})(MealDetails);
 
 const styles = StyleSheet.create({
   image: {
@@ -140,11 +147,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-const mapStateToProps = (state: StoreState, props: Props): StateProps => ({
-  isFavorite: state.ui.includes(props.navigation.getParam('id')),
-});
-
-export default connect(mapStateToProps, {
-  toggleFavs: toggleFavorite,
-})(MealDetails);
