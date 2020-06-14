@@ -1,15 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
+import {connect} from 'react-redux';
 
 import Fonts from '../utils/fonts';
+import {toggleFavorite} from '../actions';
 
-interface Props {
+interface OwnProps {
   navigation: NavigationParams;
 }
 
+interface DispatchProps {
+  toggleFavs: typeof toggleFavorite;
+}
+
+type Props = OwnProps & DispatchProps;
+
 const MealDetails: React.FunctionComponent<Props> &
-  NavigationNavigatorProps = ({navigation}) => {
+  NavigationNavigatorProps = ({navigation, toggleFavs}) => {
+  // const mealId = navigation.getParam('id');
+
+  useEffect(() => {
+    navigation.setParams({toggleee: toggleFavs});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const recipe = navigation.getParam('recipe');
   return (
     <ScrollView>
@@ -53,9 +68,22 @@ const MealDetails: React.FunctionComponent<Props> &
   );
 };
 
-MealDetails.navigationOptions = ({navigation}: NavigationParams) => ({
-  headerTitle: navigation.state.params.recipe.title,
-});
+MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
+  // console.log(navigation);
+  return {
+    headerTitle: navigation.state.params.recipe.title,
+    headerRight: () => (
+      <View>
+        <Text
+          onPress={() =>
+            navigation.state.params.toggleee(navigation.state.params.recipe.id)
+          }>
+          **Flaf!**
+        </Text>
+      </View>
+    ),
+  };
+};
 
 const styles = StyleSheet.create({
   image: {
@@ -83,4 +111,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MealDetails;
+export default connect(null, {
+  toggleFavs: toggleFavorite,
+})(MealDetails);
