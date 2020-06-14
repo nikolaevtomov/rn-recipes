@@ -25,6 +25,9 @@ const Navigation = createStackNavigator(
         ...Fonts.script,
         textAlign: 'center',
       },
+      cardStyle: {
+        backgroundColor: COLOURS.white,
+      },
     },
   },
 );

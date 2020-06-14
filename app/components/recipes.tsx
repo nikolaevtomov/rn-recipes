@@ -21,6 +21,7 @@ const Meals: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
   recipes,
 }) => {
   const catId = navigation.getParam('id');
+
   return (
     <FlatList
       data={recipes.filter((item: RecipeProps) =>
@@ -28,7 +29,7 @@ const Meals: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
       )}
       keyExtractor={(item: RecipeProps) => item.id}
       renderItem={Recipe(navigation)}
-      numColumns={2}
+      numColumns={1}
     />
   );
 };
@@ -36,10 +37,6 @@ const Meals: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
 Meals.navigationOptions = ({navigation}: NavigationParams) => ({
   headerTitle: navigation.state.params.name,
 });
-
-// const styles = StyleSheet.create({
-//   screen: {},
-// });
 
 const mapStateToProps = (state: StoreState) => ({
   recipes: state.recipes,

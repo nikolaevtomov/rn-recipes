@@ -30,10 +30,6 @@ const Categories: React.FunctionComponent<Props> = ({
   );
 };
 
-// const styles = StyleSheet.create({
-//   categories: {},
-// });
-
 const mapStateToProps = (state: StoreState): StateProps => ({
   categories: state.categories,
 });
