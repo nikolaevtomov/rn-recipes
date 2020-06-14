@@ -7,7 +7,7 @@ import {
   HeaderButtons,
   Item,
 } from 'react-navigation-header-buttons';
-// import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/FontAwesome';
 
 import Fonts from '../utils/fonts';
 import {toggleFavorite} from '../actions';
@@ -15,7 +15,7 @@ import {StoreState} from '../types';
 
 const MaterialHeaderButton = (props: any) => (
   <HeaderButton
-    // IconComponent={MaterialIcons}
+    IconComponent={MaterialIcons}
     iconSize={23}
     color="yellow"
     {...props}
@@ -103,8 +103,8 @@ MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
     headerRight: () => (
       <MaterialHeaderButtons>
         <Item
-          title={navigation.getParam('favorite') ? 'O' : 'X'}
-          // iconName={navigation.getParam('favorite') ? 'star' : 'star'}
+          title="favorite icon"
+          iconName={navigation.getParam('favorite') ? 'star' : 'star-o'}
           onPress={() =>
             navigation.state.params.toggleee(navigation.state.params.recipe.id)
           }
