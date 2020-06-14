@@ -2,9 +2,31 @@ import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
+import {
+  HeaderButton,
+  HeaderButtons,
+  Item,
+} from 'react-navigation-header-buttons';
+import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+
+const MaterialHeaderButton = (props: any) => (
+  <HeaderButton
+    IconComponent={MaterialIcons}
+    iconSize={23}
+    color="yellow"
+    {...props}
+  />
+);
+
+export const MaterialHeaderButtons = (props: any) => {
+  return (
+    <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />
+  );
+};
 
 import Fonts from '../utils/fonts';
 import {toggleFavorite} from '../actions';
+import {StoreState} from '../types';
 
 interface OwnProps {
   navigation: NavigationParams;
@@ -14,16 +36,23 @@ interface DispatchProps {
   toggleFavs: typeof toggleFavorite;
 }
 
-type Props = OwnProps & DispatchProps;
+interface StateProps {
+  isFavorite: boolean;
+}
+
+type Props = OwnProps & DispatchProps & StateProps;
 
 const MealDetails: React.FunctionComponent<Props> &
-  NavigationNavigatorProps = ({navigation, toggleFavs}) => {
-  // const mealId = navigation.getParam('id');
-
+  NavigationNavigatorProps = ({navigation, toggleFavs, isFavorite}) => {
   useEffect(() => {
     navigation.setParams({toggleee: toggleFavs});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    navigation.setParams({favorite: isFavorite});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFavorite]);
 
   const recipe = navigation.getParam('recipe');
   return (
@@ -73,14 +102,15 @@ MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
   return {
     headerTitle: navigation.state.params.recipe.title,
     headerRight: () => (
-      <View>
-        <Text
+      <MaterialHeaderButtons>
+        <Item
+          title="favorite"
+          iconName={navigation.state.params.favorite ? 'star' : 'star-o'}
           onPress={() =>
             navigation.state.params.toggleee(navigation.state.params.recipe.id)
-          }>
-          **Flaf!**
-        </Text>
-      </View>
+          }
+        />
+      </MaterialHeaderButtons>
     ),
   };
 };
@@ -111,6 +141,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, {
+const mapStateToProps = (state: StoreState, props: Props): StateProps => ({
+  isFavorite: state.ui.includes(props.navigation.getParam('id')),
+});
+
+export default connect(mapStateToProps, {
   toggleFavs: toggleFavorite,
 })(MealDetails);
