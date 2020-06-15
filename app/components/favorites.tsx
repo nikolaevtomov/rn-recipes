@@ -7,7 +7,7 @@ interface Props {}
 
 const Favorites: React.FunctionComponent<Props> = () => {
   return (
-    <View style={Styles.screen}>
+    <View style={Styles.center}>
       <Text style={Fonts.script}>Favorites</Text>
     </View>
   );

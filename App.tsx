@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {enableScreens} from 'react-native-screens';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-import StackNavigation from './app/components/stack-navigation';
+import TabNavigation from './app/components/tab-navigation';
 import categoriesReducer from './app/reducers/categories';
 import uiReducer from './app/reducers/ui';
 import recipesReducer from './app/reducers/recipes';
@@ -31,7 +31,7 @@ const App: React.FunctionComponent = () => {
         barStyle={Platform.OS === 'ios' ? 'dark-content' : 'default'}
       />
       <Provider store={store}>
-        <StackNavigation />
+        <TabNavigation />
       </Provider>
     </>
   );
