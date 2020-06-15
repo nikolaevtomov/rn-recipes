@@ -90,6 +90,7 @@ MealDetails.navigationOptions = ({
       <HeaderButtons {...rest}>
         <Item
           title="favorite icon"
+          iconSize={30}
           iconName={navigation.getParam('favorite') ? 'star' : 'star-o'}
           onPress={() =>
             navigation.state.params.toggleee(navigation.state.params.recipe.id)
