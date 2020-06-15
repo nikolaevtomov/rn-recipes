@@ -16,7 +16,7 @@ interface StateProps {
 
 type Props = OwnProps & StateProps;
 
-const Meals: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
+const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
   navigation,
   recipes,
 }) => {
@@ -34,12 +34,12 @@ const Meals: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
   );
 };
 
-Meals.navigationOptions = ({navigation}: NavigationParams) => ({
+Recipes.navigationOptions = ({navigation}: NavigationParams) => ({
   headerTitle: navigation.state.params.name,
 });
 
-const mapStateToProps = (state: StoreState) => ({
+const mapStateToProps = (state: StoreState): StateProps => ({
   recipes: state.recipes,
 });
 
-export default connect(mapStateToProps)(Meals);
+export default connect(mapStateToProps)(Recipes);

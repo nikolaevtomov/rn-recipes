@@ -2,7 +2,7 @@ import {TOGGLE_FAVORITE} from '../actions';
 
 const initialState: Array<string> = [];
 
-const uiReducer = (state = initialState, action: any) => {
+const favoritesReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case TOGGLE_FAVORITE: {
       if (!state.includes(action.payload)) {
@@ -17,4 +17,4 @@ const uiReducer = (state = initialState, action: any) => {
   }
 };
 
-export default uiReducer;
+export default favoritesReducer;

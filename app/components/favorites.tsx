@@ -1,20 +1,40 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import Fonts from '../utils/fonts';
-import Styles from '../utils/styles';
+import {FlatList} from 'react-native';
+import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
+import {connect} from 'react-redux';
 
-interface Props {}
+import {RecipeProps, StoreState} from '../types';
+import Recipe from './recipe';
 
-const Favorites: React.FunctionComponent<Props> = () => {
+interface OwnProps {
+  navigation: NavigationParams;
+}
+
+interface StateProps {
+  recipes: Array<RecipeProps>;
+  favorites: Array<string>;
+}
+
+type Props = OwnProps & StateProps;
+
+const Favorites: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
+  navigation,
+  recipes,
+  favorites,
+}) => {
   return (
-    <View style={Styles.center}>
-      <Text style={Fonts.script}>Favorites</Text>
-    </View>
+    <FlatList
+      data={recipes.filter((item: RecipeProps) => favorites.includes(item.id))}
+      keyExtractor={(item: RecipeProps) => item.id}
+      renderItem={Recipe(navigation)}
+      numColumns={1}
+    />
   );
 };
 
-// const styles = StyleSheet.create({
-//   screen: {},
-// });
+const mapStateToProps = (state: StoreState): StateProps => ({
+  recipes: state.recipes,
+  favorites: state.favorites,
+});
 
-export default Favorites;
+export default connect(mapStateToProps)(Favorites);

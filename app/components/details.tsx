@@ -102,7 +102,7 @@ MealDetails.navigationOptions = ({
 };
 
 const mapStateToProps = (state: StoreState, props: Props): StateProps => ({
-  isFavorite: state.ui.includes(props.navigation.state.params.recipe.id),
+  isFavorite: state.favorites.includes(props.navigation.state.params.recipe.id),
 });
 
 export default connect(mapStateToProps, {

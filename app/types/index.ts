@@ -22,6 +22,6 @@ export interface RecipeProps {
 
 export interface StoreState {
   categories: Array<CategoryProp>;
-  ui: Array<string>;
+  favorites: Array<string>;
   recipes: Array<RecipeProps>;
 }

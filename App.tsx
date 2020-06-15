@@ -8,7 +8,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import TabNavigation from './app/components/tab-navigation';
 import categoriesReducer from './app/reducers/categories';
-import uiReducer from './app/reducers/ui';
+import favoritesReducer from './app/reducers/favorites';
 import recipesReducer from './app/reducers/recipes';
 import {StoreState} from './app/types';
 
@@ -16,7 +16,7 @@ enableScreens();
 
 const rootReducer = combineReducers<StoreState>({
   categories: categoriesReducer,
-  ui: uiReducer,
+  favorites: favoritesReducer,
   recipes: recipesReducer,
 });
 
