@@ -18,7 +18,7 @@ const tabScreenConfig = {
     navigationOptions: {
       tabBarLabel: 'Categories',
       tabBarIcon: (props: BottomTabBarProps & {tintColor: string}) => (
-        <Icon color={props.tintColor} name="cutlery" size={30} />
+        <Icon color={props.tintColor} name="cutlery" size={26} />
       ),
     },
   },
@@ -27,7 +27,7 @@ const tabScreenConfig = {
     navigationOptions: {
       tabBarLabel: 'Favorites',
       tabBarIcon: (props: BottomTabBarProps & {tintColor: string}) => (
-        <Icon color={props.tintColor} name="star" size={30} />
+        <Icon color={props.tintColor} name="star" size={26} />
       ),
     },
   },
