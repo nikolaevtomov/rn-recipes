@@ -2,31 +2,12 @@ import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
-import {
-  HeaderButton,
-  HeaderButtons,
-  Item,
-} from 'react-navigation-header-buttons';
-import MaterialIcons from 'react-native-vector-icons/FontAwesome';
+import {Item, HeaderButtonsProps} from 'react-navigation-header-buttons';
+import HeaderButtons from './header-buttons';
 
 import Fonts from '../utils/fonts';
 import {toggleFavorite} from '../actions';
 import {StoreState} from '../types';
-
-const MaterialHeaderButton = (props: any) => (
-  <HeaderButton
-    IconComponent={MaterialIcons}
-    iconSize={23}
-    color="yellow"
-    {...props}
-  />
-);
-
-export const MaterialHeaderButtons = (props: any) => {
-  return (
-    <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />
-  );
-};
 
 interface OwnProps {
   navigation: NavigationParams;
@@ -97,11 +78,16 @@ const MealDetails: React.FunctionComponent<Props> &
   );
 };
 
-MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
+MealDetails.navigationOptions = ({
+  navigation,
+  _toggleFavs,
+  _isFavorite,
+  ...rest
+}: Props & NavigationParams & HeaderButtonsProps) => {
   return {
     headerTitle: navigation.state.params.recipe.title,
     headerRight: () => (
-      <MaterialHeaderButtons>
+      <HeaderButtons {...rest}>
         <Item
           title="favorite icon"
           iconName={navigation.getParam('favorite') ? 'star' : 'star-o'}
@@ -109,7 +95,7 @@ MealDetails.navigationOptions = ({navigation}: NavigationParams) => {
             navigation.state.params.toggleee(navigation.state.params.recipe.id)
           }
         />
-      </MaterialHeaderButtons>
+      </HeaderButtons>
     ),
   };
 };
