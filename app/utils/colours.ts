@@ -5,4 +5,5 @@ export const COLOURS: Record<string, string> = {
   yellow: '#fccb57',
   white: '#ffffff',
   black: '#2c2f2f',
+  dark: '#4c4f50',
 };

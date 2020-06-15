@@ -38,7 +38,8 @@ const TabNavigation =
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         inactiveColor: COLOURS.black,
         labeled: false,
-        barStyle: {backgroundColor: '#694fad'},
+        barStyle: {backgroundColor: COLOURS.dark},
+        shifting: false,
       })
     : createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
