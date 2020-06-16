@@ -3,11 +3,12 @@ import {View, Text, StyleSheet, ScrollView, Image} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
 import {Item, HeaderButtonsProps} from 'react-navigation-header-buttons';
-import HeaderButtons from './header-buttons';
 
+import HeaderButtons from './header-buttons';
 import Fonts from '../utils/fonts';
 import {toggleFavorite} from '../actions';
 import {StoreState} from '../types';
+import {COLOURS} from '../utils/colours';
 
 interface OwnProps {
   navigation: NavigationParams;
@@ -91,6 +92,7 @@ MealDetails.navigationOptions = ({
         <Item
           title="favorite icon"
           iconSize={30}
+          color={COLOURS.yellow}
           iconName={navigation.getParam('favorite') ? 'star' : 'star-o'}
           onPress={() =>
             navigation.state.params.toggleee(navigation.state.params.recipe.id)

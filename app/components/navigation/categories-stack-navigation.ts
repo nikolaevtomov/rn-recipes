@@ -1,11 +1,12 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
+import {Platform} from 'react-native';
 
-import Categories from './categories';
-import Recipes from './recipes';
-import Details from './details';
-import Fonts from '../utils/fonts';
-import {COLOURS} from '../utils/colours';
+import Categories from '../categories';
+import Recipes from '../recipes';
+import Details from '../details';
+import Fonts from '../../utils/fonts';
+import {COLOURS} from '../../utils/colours';
 
 export const defaultStackNavOptions = {
   // initialRouteName: 'categories',
@@ -18,6 +19,7 @@ export const defaultStackNavOptions = {
     headerTitleStyle: {
       ...Fonts.script,
       textAlign: 'center',
+      ...(Platform.OS === 'android' && {paddingRight: 30}),
     },
     cardStyle: {
       backgroundColor: COLOURS.white,
@@ -25,7 +27,7 @@ export const defaultStackNavOptions = {
   },
 };
 
-const Navigation = createStackNavigator(
+const CategoriesStackNavigation = createStackNavigator(
   {
     categories: {screen: Categories},
     recipes: Recipes,
@@ -34,4 +36,4 @@ const Navigation = createStackNavigator(
   defaultStackNavOptions,
 );
 
-export default createAppContainer(Navigation);
+export default createAppContainer(CategoriesStackNavigation);

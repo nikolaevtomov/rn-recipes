@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {enableScreens} from 'react-native-screens';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-import TabNavigation from './app/components/tab-navigation';
+import DrawerNavigation from './app/components/navigation/drawer-navigation';
 import categoriesReducer from './app/reducers/categories';
 import favoritesReducer from './app/reducers/favorites';
 import recipesReducer from './app/reducers/recipes';
@@ -31,7 +31,7 @@ const App: React.FunctionComponent = () => {
         barStyle={Platform.OS === 'ios' ? 'dark-content' : 'default'}
       />
       <Provider store={store}>
-        <TabNavigation />
+        <DrawerNavigation />
       </Provider>
     </>
   );

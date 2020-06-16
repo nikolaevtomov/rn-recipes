@@ -7,15 +7,8 @@ import {
 } from 'react-navigation-header-buttons';
 import MaterialIcons from 'react-native-vector-icons/FontAwesome';
 
-import {COLOURS} from '../utils/colours';
-
 const MaterialHeaderButton = (props: HeaderButtonProps) => (
-  <HeaderButton
-    IconComponent={MaterialIcons}
-    iconSize={23}
-    color={COLOURS.yellow}
-    {...props}
-  />
+  <HeaderButton IconComponent={MaterialIcons} iconSize={23} {...props} />
 );
 
 const MaterialHeaderButtons = (props: HeaderButtonsProps) => (

@@ -2,7 +2,10 @@ import React from 'react';
 import {FlatList} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
+import {Item, HeaderButtonsProps} from 'react-navigation-header-buttons';
 
+import HeaderButtons from './header-buttons';
+import {COLOURS} from '../utils/colours';
 import {RecipeProps, StoreState} from '../types';
 import Recipe from './recipe';
 
@@ -31,6 +34,25 @@ const Favorites: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
     />
   );
 };
+
+Favorites.navigationOptions = ({
+  navigation,
+  _categories,
+  ...rest
+}: Props & NavigationParams & HeaderButtonsProps) => ({
+  headerTitle: 'Favorites',
+  headerLeft: () => (
+    <HeaderButtons {...rest}>
+      <Item
+        title="Menu"
+        iconSize={30}
+        color={COLOURS.black}
+        iconName="navicon"
+        onPress={() => navigation.toggleDrawer()}
+      />
+    </HeaderButtons>
+  ),
+});
 
 const mapStateToProps = (state: StoreState): StateProps => ({
   recipes: state.recipes,

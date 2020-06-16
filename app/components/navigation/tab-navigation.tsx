@@ -8,13 +8,13 @@ import {
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import MainStackNavigation from './main-stack-navigation';
+import CategoriesStackNavigation from './categories-stack-navigation';
 import FavoritesStackNavigation from './favorites-stack-navigation';
-import {COLOURS} from '../utils/colours';
+import {COLOURS} from '../../utils/colours';
 
 const tabScreenConfig = {
   categories: {
-    screen: MainStackNavigation,
+    screen: CategoriesStackNavigation,
     navigationOptions: {
       tabBarLabel: 'Categories',
       tabBarIcon: (props: BottomTabBarProps & {tintColor: string}) => (
