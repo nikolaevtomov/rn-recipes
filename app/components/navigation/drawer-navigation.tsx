@@ -1,8 +1,9 @@
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
-
 import TabsNavigation from './tab-navigation';
 import FiltersStackNavigation from './filters-stack-navigation';
+import {COLOURS} from '../../utils/colours';
+import Fonts from '../../utils/fonts';
 
 const DrawerNavigation = createDrawerNavigator(
   {
@@ -20,9 +21,18 @@ const DrawerNavigation = createDrawerNavigator(
     },
   },
   {
-    drawerPosition: 'left',
-    drawerType: 'front',
-    drawerWidth: 240,
+    contentOptions: {
+      activeTintColor: COLOURS.black,
+      activeBackgroundColor: COLOURS.ternary,
+      activeLabelStyle: {
+        color: COLOURS.white,
+      },
+      labelStyle: {
+        ...Fonts.script,
+        fontSize: 24,
+        fontWeight: null,
+      },
+    },
   },
 );
 
