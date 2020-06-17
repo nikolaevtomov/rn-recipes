@@ -4,6 +4,11 @@ export const toggleFavorite = (id: string) => {
 };
 
 export const SET_FILTERS = 'SET_FILTERS';
-export const setFilters = (filterSettings: any) => {
-  return {type: SET_FILTERS, payload: filterSettings};
+export const setFilters = (filter: any) => {
+  return {type: SET_FILTERS, payload: filter};
+};
+
+export const RESET_FILTERS = 'RESET_FILTERS';
+export const resetFilters = () => {
+  return {type: RESET_FILTERS};
 };

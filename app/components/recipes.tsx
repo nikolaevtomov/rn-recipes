@@ -3,7 +3,7 @@ import {FlatList} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
 
-import {KeyKinda} from '../reducers/filters';
+import {FILTER_ENUM} from '../reducers/filters';
 import {RecipeProps, StoreState} from '../types';
 import Recipe from './recipe';
 
@@ -13,7 +13,7 @@ interface OwnProps {
 
 interface StateProps {
   recipes: Array<RecipeProps>;
-  filters: Array<string>;
+  filters: Array<FILTER_ENUM>;
 }
 
 type Props = OwnProps & StateProps;
@@ -30,7 +30,7 @@ const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
       filters
         .map((filter: string) =>
           recipes
-            .filter((recipe: RecipeProps) => recipe[filter as KeyKinda])
+            .filter((recipe: RecipeProps) => recipe[filter as FILTER_ENUM])
             .map((recipe: RecipeProps) => recipe.id),
         )
         .flat(1),

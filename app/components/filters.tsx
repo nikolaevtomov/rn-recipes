@@ -2,25 +2,51 @@ import React from 'react';
 import {View, Text, Switch, StyleSheet} from 'react-native';
 import {Item, HeaderButtonsProps} from 'react-navigation-header-buttons';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
+import {connect} from 'react-redux';
 
 import HeaderButtons from './header-buttons';
 import Fonts from '../utils/fonts';
+import {setFilters, resetFilters} from '../actions';
+import {FILTER_ENUM} from '../reducers/filters';
 // import Styles from '../utils/styles';
 import {COLOURS} from '../utils/colours';
+import {StoreState} from 'app/types';
 
-interface Props {}
+interface DispatchProps {
+  setFiltersValue: typeof setFilters;
+  resetFiltersValue: typeof resetFilters;
+}
 
-const Filters: React.FunctionComponent<Props> &
-  NavigationNavigatorProps = () => {
+interface StateProps {
+  filters: Array<FILTER_ENUM>;
+}
+
+type Props = DispatchProps & StateProps;
+
+const Filters: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
+  filters,
+  setFiltersValue,
+  resetFiltersValue,
+}) => {
   return (
     <View style={styles.screen}>
+      <View style={styles.switchContainer}>
+        <Text style={styles.switchLabel}>All</Text>
+        <Switch
+          trackColor={{true: COLOURS.secondary, false: ''}}
+          thumbColor={COLOURS.black}
+          onValueChange={() => resetFiltersValue()}
+          value={!filters.length}
+        />
+      </View>
+
       <View style={styles.switchContainer}>
         <Text style={styles.switchLabel}>Gluten free</Text>
         <Switch
           trackColor={{true: COLOURS.secondary, false: ''}}
           thumbColor={COLOURS.black}
-          onValueChange={() => {}}
-          value={false}
+          onValueChange={() => setFiltersValue(FILTER_ENUM.isGlutenFree)}
+          value={filters.includes(FILTER_ENUM.isGlutenFree)}
         />
       </View>
 
@@ -29,8 +55,8 @@ const Filters: React.FunctionComponent<Props> &
         <Switch
           trackColor={{true: COLOURS.secondary, false: COLOURS.primary}}
           thumbColor={COLOURS.black}
-          onValueChange={() => {}}
-          value={true}
+          onValueChange={() => setFiltersValue(FILTER_ENUM.isVegan)}
+          value={filters.includes(FILTER_ENUM.isVegan)}
         />
       </View>
 
@@ -39,8 +65,8 @@ const Filters: React.FunctionComponent<Props> &
         <Switch
           trackColor={{true: COLOURS.secondary, false: COLOURS.primary}}
           thumbColor={COLOURS.black}
-          onValueChange={() => {}}
-          value={true}
+          onValueChange={() => setFiltersValue(FILTER_ENUM.isVegetarian)}
+          value={filters.includes(FILTER_ENUM.isVegetarian)}
         />
       </View>
 
@@ -49,8 +75,8 @@ const Filters: React.FunctionComponent<Props> &
         <Switch
           trackColor={{true: COLOURS.secondary, false: COLOURS.primary}}
           thumbColor={COLOURS.black}
-          onValueChange={() => {}}
-          value={true}
+          onValueChange={() => setFiltersValue(FILTER_ENUM.isLactoseFree)}
+          value={filters.includes(FILTER_ENUM.isLactoseFree)}
         />
       </View>
     </View>
@@ -94,4 +120,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Filters;
+const mapStateToProps = (state: StoreState): StateProps => ({
+  filters: state.filters,
+});
+
+export default connect(mapStateToProps, {
+  setFiltersValue: setFilters,
+  resetFiltersValue: resetFilters,
+})(Filters);

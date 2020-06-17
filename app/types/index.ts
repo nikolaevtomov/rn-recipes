@@ -1,3 +1,5 @@
+import {FILTER_ENUM} from '../reducers/filters';
+
 export interface CategoryProp {
   id: string;
   name: string;
@@ -24,5 +26,5 @@ export interface StoreState {
   categories: Array<CategoryProp>;
   favorites: Array<string>;
   recipes: Array<RecipeProps>;
-  filters: Array<string>;
+  filters: Array<FILTER_ENUM>;
 }
