@@ -24,4 +24,5 @@ export interface StoreState {
   categories: Array<CategoryProp>;
   favorites: Array<string>;
   recipes: Array<RecipeProps>;
+  filters: Array<string>;
 }

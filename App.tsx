@@ -10,6 +10,7 @@ import DrawerNavigation from './app/components/navigation/drawer-navigation';
 import categoriesReducer from './app/reducers/categories';
 import favoritesReducer from './app/reducers/favorites';
 import recipesReducer from './app/reducers/recipes';
+import filtersReducer from './app/reducers/filters';
 import {StoreState} from './app/types';
 
 enableScreens();
@@ -18,6 +19,7 @@ const rootReducer = combineReducers<StoreState>({
   categories: categoriesReducer,
   favorites: favoritesReducer,
   recipes: recipesReducer,
+  filters: filtersReducer,
 });
 
 const composeEnhancers = composeWithDevTools({});

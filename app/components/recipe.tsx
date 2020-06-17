@@ -29,6 +29,11 @@ const Recipe = (
       }}>
       <View style={Styles.center}>
         <ImageBackground source={{uri: item.imageUrl}} style={styles.bgImage}>
+          {item.isGlutenFree && <Text style={styles.info}>Gluten Free</Text>}
+          {item.isVegan && <Text style={styles.info}>Vegan</Text>}
+          {item.isVegetarian && <Text style={styles.info}>Vegetarian</Text>}
+          {item.isLactoseFree && <Text style={styles.info}>Lactose Free</Text>}
+
           <View style={styles.titleContainer}>
             <Text style={{...styles.title, ...Fonts.delius}} numberOfLines={1}>
               {item.title}
@@ -62,6 +67,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: COLOURS.white,
     textAlign: 'center',
+  },
+  info: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    color: COLOURS.white,
   },
 });
 
