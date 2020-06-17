@@ -14,6 +14,7 @@ interface OwnProps {
 interface StateProps {
   recipes: Array<RecipeProps>;
   filters: Array<FILTER_ENUM>;
+  filtersApplied: boolean;
 }
 
 type Props = OwnProps & StateProps;
@@ -22,6 +23,7 @@ const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
   navigation,
   recipes,
   filters,
+  filtersApplied,
 }) => {
   const catId = navigation.getParam('id');
 
@@ -43,9 +45,13 @@ const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
 
   return (
     <FlatList
-      data={filteredByCategory.filter((item: RecipeProps) =>
-        filteredIDs.includes(item.id),
-      )}
+      data={
+        filtersApplied
+          ? filteredByCategory.filter((item: RecipeProps) =>
+              filteredIDs.includes(item.id),
+            )
+          : filteredByCategory
+      }
       keyExtractor={(item: RecipeProps) => item.id}
       renderItem={Recipe(navigation)}
       numColumns={1}
@@ -60,6 +66,7 @@ Recipes.navigationOptions = ({navigation}: NavigationParams) => ({
 const mapStateToProps = (state: StoreState): StateProps => ({
   recipes: state.recipes,
   filters: state.filters,
+  filtersApplied: !!state.filters.length,
 });
 
 export default connect(mapStateToProps)(Recipes);
