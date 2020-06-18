@@ -1,11 +1,13 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
 import {Item, HeaderButtonsProps} from 'react-navigation-header-buttons';
 
 import HeaderButtons from './header-buttons';
 import {COLOURS} from '../utils/colours';
+import Styles from '../utils/styles';
+import Fonts from '../utils/fonts';
 import {RecipeProps, StoreState} from '../types';
 import Recipe from './recipe';
 
@@ -25,13 +27,21 @@ const Favorites: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
   recipes,
   favorites,
 }) => {
-  return (
+  const recipesList = recipes.filter((item: RecipeProps) =>
+    favorites.includes(item.id),
+  );
+
+  return recipesList.length ? (
     <FlatList
-      data={recipes.filter((item: RecipeProps) => favorites.includes(item.id))}
+      data={recipesList}
       keyExtractor={(item: RecipeProps) => item.id}
       renderItem={Recipe(navigation)}
       numColumns={1}
     />
+  ) : (
+    <View style={Styles.center}>
+      <Text style={Fonts.script}>No saved favorites yet</Text>
+    </View>
   );
 };
 

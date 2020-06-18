@@ -1,11 +1,13 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 import {NavigationParams, NavigationNavigatorProps} from 'react-navigation';
 import {connect} from 'react-redux';
 
 import {FILTER_ENUM} from '../reducers/filters';
 import {RecipeProps, StoreState} from '../types';
 import Recipe from './recipe';
+import Styles from '../utils/styles';
+import Fonts from '../utils/fonts';
 
 interface OwnProps {
   navigation: NavigationParams;
@@ -43,7 +45,7 @@ const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
     item.categoryIds.includes(catId),
   ); // [{id: 'm1'...}, {...}, ...]
 
-  return (
+  return !filteredIDs.length || !filteredByCategory.length ? (
     <FlatList
       data={
         filtersApplied
@@ -56,6 +58,11 @@ const Recipes: React.FunctionComponent<Props> & NavigationNavigatorProps = ({
       renderItem={Recipe(navigation)}
       numColumns={1}
     />
+  ) : (
+    <View style={Styles.center}>
+      <Text style={Fonts.script}>No receipt to show</Text>
+      <Text style={Fonts.script}>You may change filters</Text>
+    </View>
   );
 };
 
